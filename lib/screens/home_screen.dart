@@ -27,23 +27,32 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> loadProducts() async {
     try {
       final products = await ApiService.fetchProducts();
-
       setState(() {
         allProducts = products;
         filteredProducts = products;
-        categories = ["All", ...{
-          for (var p in products) p.category
-        }];
+        categories = ["All", ...{for (var p in products) p.category}];
         isLoading = false;
       });
     } catch (e) {
-      print(e);
+      print("Fetch gagal: $e");
     }
   }
 
-  void filterByCategory(String? category) {
+  Future<void> refreshProducts() async {
+    try {
+      final products = await ApiService.refreshProducts();
+      setState(() {
+        allProducts = products;
+        filterByCategory(selectedCategory);
+      });
+    } catch (e) {
+      print("Refresh gagal: $e");
+    }
+  }
+
+  void filterByCategory(String category) {
     setState(() {
-      selectedCategory = category!;
+      selectedCategory = category;
       filteredProducts = category == "All"
           ? allProducts
           : allProducts.where((p) => p.category == category).toList();
@@ -55,13 +64,22 @@ class _HomeScreenState extends State<HomeScreen> {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text(kAppName),
-        actions: [
-          CircleAvatar(
-            backgroundColor: theme.colorScheme.primary,
-            child: const Icon(Icons.person, color: Colors.white),
+        backgroundColor: theme.colorScheme.surface,
+        title: Text(
+          kAppName,
+          style: theme.textTheme.titleLarge?.copyWith(
+            fontWeight: FontWeight.bold,
+            color: theme.colorScheme.primary,
           ),
-          const SizedBox(width: 12),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 12),
+            child: CircleAvatar(
+              backgroundColor: theme.colorScheme.secondaryContainer,
+              child: const Icon(Icons.person, color: Colors.white),
+            ),
+          ),
         ],
       ),
       body: isLoading
@@ -69,16 +87,16 @@ class _HomeScreenState extends State<HomeScreen> {
           : Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.fromLTRB(16, 12, 16, 4),
             child: DropdownButtonFormField<String>(
               value: selectedCategory,
               items: categories
-                  .map((c) => DropdownMenuItem(
-                value: c,
-                child: Text(c),
-              ))
+                  .map((c) =>
+                  DropdownMenuItem(value: c, child: Text(c)))
                   .toList(),
-              onChanged: filterByCategory,
+              onChanged: (val) {
+                if (val != null) filterByCategory(val);
+              },
               decoration: const InputDecoration(
                 labelText: "Kategori",
                 border: OutlineInputBorder(),
@@ -86,18 +104,22 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           Expanded(
-            child: GridView.builder(
-              padding: const EdgeInsets.all(12),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
-                childAspectRatio: 0.7,
+            child: RefreshIndicator(
+              onRefresh: refreshProducts,
+              child: GridView.builder(
+                padding: const EdgeInsets.all(16),
+                gridDelegate:
+                const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 16,
+                  childAspectRatio: 0.68,
+                ),
+                itemCount: filteredProducts.length,
+                itemBuilder: (context, index) {
+                  return ProductCard(product: filteredProducts[index]);
+                },
               ),
-              itemCount: filteredProducts.length,
-              itemBuilder: (context, index) {
-                return ProductCard(product: filteredProducts[index]);
-              },
             ),
           ),
         ],
