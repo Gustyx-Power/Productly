@@ -5,7 +5,7 @@ import '../utils/constants.dart';
 
 class ApiService {
   static Future<List<Product>> fetchProducts() async {
-    final url = Uri.parse('$kApiBaseUrl/products?limit=250');
+    final url = Uri.parse('$kApiBaseUrl/products?limit=30&offset=0');
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
