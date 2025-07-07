@@ -10,13 +10,14 @@ import 'screens/splash_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Init Hive
-  final appDocDir = await getApplicationDocumentsDirectory();
-  await Hive.initFlutter(appDocDir.path);
-  await Hive.openBox('cart'); // untuk menyimpan data keranjang
+  // Init Hive + prepare box
+  final appDir = await getApplicationDocumentsDirectory();
+  await Hive.initFlutter(appDir.path);
+  await Hive.openBox('products');
+  await Hive.openBox('cart');
 
-  // Kunci orientasi (opsional)
-  SystemChrome.setPreferredOrientations([
+  // Lock portrait
+  await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
