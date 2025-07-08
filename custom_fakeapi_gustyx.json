@@ -105,7 +105,7 @@
     "category": {
       "id": 2,
       "name": "Electronics",
-      "slug": "electronics",
+      "slug": "electronics"
     },
     "images": ["images/product8.jpg"],
     "creationAt": "2025-07-08T08:35:00.000Z",
