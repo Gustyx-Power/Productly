@@ -9,7 +9,7 @@
       "name": "Electronics",
       "slug": "electronics"
     },
-    "images": ["images/product1.jpg"],
+    "images": ["images/product1.jpeg"],
     "creationAt": "2025-07-08T08:00:00.000Z",
     "updatedAt": "2025-07-08T08:00:00.000Z"
   },
@@ -23,7 +23,7 @@
       "name": "Electronics",
       "slug": "electronics"
     },
-    "images": ["images/product2.jpg"],
+    "images": ["images/product2.jpeg"],
     "creationAt": "2025-07-08T08:05:00.000Z",
     "updatedAt": "2025-07-08T08:05:00.000Z"
   },
@@ -37,7 +37,7 @@
       "name": "Electronics",
       "slug": "electronics"
     },
-    "images": ["images/product3.jpg"],
+    "images": ["images/product3.jpeg"],
     "creationAt": "2025-07-08T08:10:00.000Z",
     "updatedAt": "2025-07-08T08:10:00.000Z"
   },
@@ -51,7 +51,7 @@
       "name": "Electronics",
       "slug": "electronics"
     },
-    "images": ["images/product4.jpg"],
+    "images": ["images/product4.jpeg"],
     "creationAt": "2025-07-08T08:15:00.000Z",
     "updatedAt": "2025-07-08T08:15:00.000Z"
   },
@@ -65,7 +65,7 @@
       "name": "Electronics",
       "slug": "electronics"
     },
-    "images": ["images/product5.jpg"],
+    "images": ["images/product5.jpeg"],
     "creationAt": "2025-07-08T08:20:00.000Z",
     "updatedAt": "2025-07-08T08:20:00.000Z"
   },
@@ -79,7 +79,7 @@
       "name": "Electronics",
       "slug": "electronics"
     },
-    "images": ["images/product6.jpg"],
+    "images": ["images/product6.jpeg"],
     "creationAt": "2025-07-08T08:25:00.000Z",
     "updatedAt": "2025-07-08T08:25:00.000Z"
   },
@@ -93,7 +93,7 @@
       "name": "Electronics",
       "slug": "electronics"
     },
-    "images": ["images/product7.jpg"],
+    "images": ["images/product7.jpeg"],
     "creationAt": "2025-07-08T08:30:00.000Z",
     "updatedAt": "2025-07-08T08:30:00.000Z"
   },
@@ -107,7 +107,7 @@
       "name": "Electronics",
       "slug": "electronics"
     },
-    "images": ["images/product8.jpg"],
+    "images": ["images/product8.jpeg"],
     "creationAt": "2025-07-08T08:35:00.000Z",
     "updatedAt": "2025-07-08T08:35:00.000Z"
   },
@@ -121,7 +121,7 @@
       "name": "Electronics",
       "slug": "electronics"
     },
-    "images": ["images/product9.jpg"],
+    "images": ["images/product9.jpeg"],
     "creationAt": "2025-07-08T08:40:00.000Z",
     "updatedAt": "2025-07-08T08:40:00.000Z"
   },
@@ -135,7 +135,7 @@
       "name": "Electronics",
       "slug": "electronics"
     },
-    "images": ["images/product10.jpg"],
+    "images": ["images/product10.jpeg"],
     "creationAt": "2025-07-08T08:45:00.000Z",
     "updatedAt": "2025-07-08T08:45:00.000Z"
   },
@@ -149,7 +149,7 @@
       "name": "Electronics",
       "slug": "electronics"
     },
-    "images": ["images/product11.jpg"],
+    "images": ["images/product11.jpeg"],
     "creationAt": "2025-07-08T08:50:00.000Z",
     "updatedAt": "2025-07-08T08:50:00.000Z"
   },
@@ -163,7 +163,7 @@
       "name": "Electronics",
       "slug": "electronics"
     },
-    "images": ["images/product12.jpg"],
+    "images": ["images/product12.jpeg"],
     "creationAt": "2025-07-08T08:55:00.000Z",
     "updatedAt": "2025-07-08T08:55:00.000Z"
   },
@@ -177,7 +177,7 @@
       "name": "Electronics",
       "slug": "electronics"
     },
-    "images": ["images/product13.jpg"],
+    "images": ["images/product13.jpeg"],
     "creationAt": "2025-07-08T09:00:00.000Z",
     "updatedAt": "2025-07-08T09:00:00.000Z"
   },
@@ -191,7 +191,7 @@
       "name": "Electronics",
       "slug": "electronics"
     },
-    "images": ["images/product14.jpg"],
+    "images": ["images/product14.jpeg"],
     "creationAt": "2025-07-08T09:05:00.000Z",
     "updatedAt": "2025-07-08T09:05:00.000Z"
   },
@@ -205,7 +205,7 @@
       "name": "Electronics",
       "slug": "electronics"
     },
-    "images": ["images/product15.jpg"],
+    "images": ["images/product15.jpeg"],
     "creationAt": "2025-07-08T09:10:00.000Z",
     "updatedAt": "2025-07-08T09:10:00.000Z"
   }
