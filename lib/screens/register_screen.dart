@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
+import '../models/user_model.dart';
 import '../services/auth_service.dart';
-import 'home_screen.dart';
-import 'register_screen.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
+  final _nameCtrl = TextEditingController();
   final _emailCtrl = TextEditingController();
   final _passCtrl = TextEditingController();
   bool _isLoading = false;
   String? _error;
 
-  Future<void> _login() async {
+  Future<void> _register() async {
     if (!_formKey.currentState!.validate()) return;
 
     setState(() {
@@ -25,21 +25,24 @@ class _LoginScreenState extends State<LoginScreen> {
       _error = null;
     });
 
-    final success = await AuthService.login(
-      _emailCtrl.text.trim(),
-      _passCtrl.text,
+    final newUser = UserModel(
+      name: _nameCtrl.text.trim(),
+      email: _emailCtrl.text.trim(),
+      password: _passCtrl.text,
     );
+
+    final success = await AuthService.registerUser(newUser);
 
     if (!mounted) return;
 
     if (success) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const HomeScreen()),
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Berhasil daftar. Silakan login.")),
       );
+      Navigator.pop(context); // Kembali ke login
     } else {
       setState(() {
-        _error = "Email atau password salah";
+        _error = "Email sudah terdaftar.";
       });
     }
 
@@ -50,6 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void dispose() {
+    _nameCtrl.dispose();
     _emailCtrl.dispose();
     _passCtrl.dispose();
     super.dispose();
@@ -58,7 +62,6 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -68,9 +71,9 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Selamat Datang 👋", style: theme.textTheme.headlineMedium),
+                Text("Buat Akun 🎉", style: theme.textTheme.headlineMedium),
                 const SizedBox(height: 6),
-                Text("Masuk ke akun kamu untuk lanjut", style: theme.textTheme.bodyMedium),
+                Text("Isi data lengkap di bawah ini", style: theme.textTheme.bodyMedium),
                 const SizedBox(height: 32),
 
                 if (_error != null)
@@ -92,6 +95,18 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
 
+                TextFormField(
+                  controller: _nameCtrl,
+                  decoration: const InputDecoration(
+                    labelText: "Nama Lengkap",
+                    prefixIcon: Icon(Icons.person),
+                    border: OutlineInputBorder(),
+                  ),
+                  validator: (val) => val == null || val.isEmpty
+                      ? "Nama wajib diisi"
+                      : null,
+                ),
+                const SizedBox(height: 16),
                 TextFormField(
                   controller: _emailCtrl,
                   keyboardType: TextInputType.emailAddress,
@@ -120,27 +135,22 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(
                   width: double.infinity,
                   child: FilledButton.icon(
-                    onPressed: _isLoading ? null : _login,
-                    icon: const Icon(Icons.login),
+                    icon: const Icon(Icons.app_registration),
                     label: _isLoading
                         ? const SizedBox(
                       width: 16,
                       height: 16,
                       child: CircularProgressIndicator(strokeWidth: 2),
                     )
-                        : const Text("Masuk"),
+                        : const Text("Daftar"),
+                    onPressed: _isLoading ? null : _register,
                   ),
                 ),
                 const SizedBox(height: 16),
                 Center(
                   child: TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (_) => const RegisterScreen()),
-                      );
-                    },
-                    child: const Text("Belum punya akun? Daftar"),
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text("Sudah punya akun? Masuk"),
                   ),
                 ),
               ],

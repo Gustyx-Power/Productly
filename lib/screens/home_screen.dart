@@ -26,28 +26,28 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> loadProducts() async {
     try {
-      final products = await ApiService.fetchProducts();
+      final apiProducts = await ApiService.fetchProducts();
+      final customProducts = await ApiService.fetchCustomProducts();
+
+      final combined = [
+        ...apiProducts.map((p) => p.copyWith(source: "fakestore")),
+        ...customProducts.map((p) => p.copyWith(source: "custom")),
+      ];
+
       setState(() {
-        allProducts = products;
-        filteredProducts = products;
-        categories = ["All", ...{for (var p in products) p.category}];
+        allProducts = combined;
+        filteredProducts = combined;
+        categories = ["All", ...{for (var p in combined) p.category}];
         isLoading = false;
       });
     } catch (e) {
-      print("Fetch gagal: $e");
+      debugPrint("Gagal memuat produk: $e");
     }
   }
 
   Future<void> refreshProducts() async {
-    try {
-      final products = await ApiService.refreshProducts();
-      setState(() {
-        allProducts = products;
-        filterByCategory(selectedCategory);
-      });
-    } catch (e) {
-      print("Refresh gagal: $e");
-    }
+    setState(() => isLoading = true);
+    await loadProducts();
   }
 
   void filterByCategory(String category) {
@@ -62,6 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: theme.colorScheme.surface,
@@ -98,7 +99,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 if (val != null) filterByCategory(val);
               },
               decoration: const InputDecoration(
-                labelText: "Kategori",
+                labelText: "Filter Kategori",
+                prefixIcon: Icon(Icons.category),
                 border: OutlineInputBorder(),
               ),
             ),
@@ -117,7 +119,37 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 itemCount: filteredProducts.length,
                 itemBuilder: (context, index) {
-                  return ProductCard(product: filteredProducts[index]);
+                  final product = filteredProducts[index];
+
+                  return Stack(
+                    children: [
+                      ProductCard(product: product),
+                      Positioned(
+                        top: 8,
+                        left: 8,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 6, vertical: 2),
+                          decoration: BoxDecoration(
+                            color: product.source == "custom"
+                                ? Colors.amber
+                                : Colors.blueGrey,
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Text(
+                            product.source == "custom"
+                                ? "Custom"
+                                : "Fakestore",
+                            style: const TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
                 },
               ),
             ),
