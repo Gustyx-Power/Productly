@@ -3,24 +3,34 @@ import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 
+import 'models/cart_item.dart';
+import 'models/product_model.dart';
 import 'models/user_model.dart';
 import 'theme/theme_config.dart';
 import 'utils/constants.dart';
 import 'screens/splash_screen.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Init Hive + prepare box
-  Hive.registerAdapter(UserModelAdapter());
+  // 🔧 Init Hive dan direktori
   final appDir = await getApplicationDocumentsDirectory();
   await Hive.initFlutter(appDir.path);
+
+  // ✅ Sebelum openBox, daftarkan adapter
+  Hive.registerAdapter(UserModelAdapter());
+  Hive.registerAdapter(CartItemAdapter());
+  Hive.registerAdapter(ProductAdapter());
+
+
+// ✅ Lalu open box-nya
   await Hive.openBox('products');
-  await Hive.openBox('cart');
+  await Hive.openBox<CartItem>('cart'); // buka sebagai CartItem
   await Hive.openBox('session');
   await Hive.openBox<UserModel>('users');
+  await Hive.openBox('settings');
 
-  // Lock portrait
+  // 🔒 Lock orientasi ke portrait
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -37,8 +47,8 @@ class ProductlyApp extends StatelessWidget {
     return MaterialApp(
       title: kAppName,
       debugShowCheckedModeBanner: false,
-      theme: lightTheme,
-      home: const SplashScreen(),
+      theme: lightTheme, // 🎨 Material 3 Light Theme
+      home: const SplashScreen(), // 🚀 Mulai dari Splash Screen
     );
   }
 }
