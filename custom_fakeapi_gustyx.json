@@ -1,0 +1,212 @@
+[
+  {
+    "id": 2001,
+    "title": "Wireless Earbuds Pro",
+    "price": 299,
+    "description": "Earbuds wireless dengan noise-canceling dan konektivitas Bluetooth 5.2 yang stabil.",
+    "category": {
+      "id": 2,
+      "name": "Electronics",
+      "slug": "electronics"
+    },
+    "images": ["images/product1.jpg"],
+    "creationAt": "2025-07-08T08:00:00.000Z",
+    "updatedAt": "2025-07-08T08:00:00.000Z"
+  },
+  {
+    "id": 2002,
+    "title": "Smart LED Light Bulb",
+    "price": 79,
+    "description": "Bohlam pintar yang bisa diatur warnanya via smartphone dan voice control.",
+    "category": {
+      "id": 2,
+      "name": "Electronics",
+      "slug": "electronics"
+    },
+    "images": ["images/product2.jpg"],
+    "creationAt": "2025-07-08T08:05:00.000Z",
+    "updatedAt": "2025-07-08T08:05:00.000Z"
+  },
+  {
+    "id": 2003,
+    "title": "Bluetooth Speaker BassBoost",
+    "price": 199,
+    "description": "Speaker portable dengan bass powerfull, cocok untuk outdoor dan party.",
+    "category": {
+      "id": 2,
+      "name": "Electronics",
+      "slug": "electronics"
+    },
+    "images": ["images/product3.jpg"],
+    "creationAt": "2025-07-08T08:10:00.000Z",
+    "updatedAt": "2025-07-08T08:10:00.000Z"
+  },
+  {
+    "id": 2004,
+    "title": "4K Action Camera Waterproof",
+    "price": 459,
+    "description": "Kamera aksi dengan kemampuan merekam 4K, tahan air hingga 30 meter.",
+    "category": {
+      "id": 2,
+      "name": "Electronics",
+      "slug": "electronics"
+    },
+    "images": ["images/product4.jpg"],
+    "creationAt": "2025-07-08T08:15:00.000Z",
+    "updatedAt": "2025-07-08T08:15:00.000Z"
+  },
+  {
+    "id": 2005,
+    "title": "USB-C Fast Charger 33W",
+    "price": 99,
+    "description": "Charger cepat 33W dengan teknologi PD dan QC 3.0 untuk semua perangkat modern.",
+    "category": {
+      "id": 2,
+      "name": "Electronics",
+      "slug": "electronics"
+    },
+    "images": ["images/product5.jpg"],
+    "creationAt": "2025-07-08T08:20:00.000Z",
+    "updatedAt": "2025-07-08T08:20:00.000Z"
+  },
+  {
+    "id": 2006,
+    "title": "Noise Cancelling Headphones",
+    "price": 359,
+    "description": "Headphone over-ear dengan fitur active noise-canceling dan baterai tahan lama.",
+    "category": {
+      "id": 2,
+      "name": "Electronics",
+      "slug": "electronics"
+    },
+    "images": ["images/product6.jpg"],
+    "creationAt": "2025-07-08T08:25:00.000Z",
+    "updatedAt": "2025-07-08T08:25:00.000Z"
+  },
+  {
+    "id": 2007,
+    "title": "Smartphone Tripod Stand",
+    "price": 89,
+    "description": "Tripod serbaguna untuk vlog dan meeting online, kompatibel dengan semua HP.",
+    "category": {
+      "id": 2,
+      "name": "Electronics",
+      "slug": "electronics"
+    },
+    "images": ["images/product7.jpg"],
+    "creationAt": "2025-07-08T08:30:00.000Z",
+    "updatedAt": "2025-07-08T08:30:00.000Z"
+  },
+  {
+    "id": 2008,
+    "title": "Mini Projector HD 1080p",
+    "price": 529,
+    "description": "Proyektor mini dengan dukungan HDMI & USB, cocok untuk nonton film di rumah.",
+    "category": {
+      "id": 2,
+      "name": "Electronics",
+      "slug": "electronics",
+    },
+    "images": ["images/product8.jpg"],
+    "creationAt": "2025-07-08T08:35:00.000Z",
+    "updatedAt": "2025-07-08T08:35:00.000Z"
+  },
+  {
+    "id": 2009,
+    "title": "Wireless Gaming Mouse RGB",
+    "price": 119,
+    "description": "Mouse gaming dengan DPI hingga 7200, desain ergonomis dan pencahayaan RGB.",
+    "category": {
+      "id": 2,
+      "name": "Electronics",
+      "slug": "electronics"
+    },
+    "images": ["images/product9.jpg"],
+    "creationAt": "2025-07-08T08:40:00.000Z",
+    "updatedAt": "2025-07-08T08:40:00.000Z"
+  },
+  {
+    "id": 2010,
+    "title": "Smartwatch Fitness Band Pro",
+    "price": 199,
+    "description": "Pelacak kesehatan lengkap dengan sensor detak jantung dan sleep monitoring.",
+    "category": {
+      "id": 2,
+      "name": "Electronics",
+      "slug": "electronics"
+    },
+    "images": ["images/product10.jpg"],
+    "creationAt": "2025-07-08T08:45:00.000Z",
+    "updatedAt": "2025-07-08T08:45:00.000Z"
+  },
+  {
+    "id": 2011,
+    "title": "Digital Alarm Clock LED",
+    "price": 59,
+    "description": "Jam alarm digital dengan tampilan LED besar, cocok untuk kamar tidur modern.",
+    "category": {
+      "id": 2,
+      "name": "Electronics",
+      "slug": "electronics"
+    },
+    "images": ["images/product11.jpg"],
+    "creationAt": "2025-07-08T08:50:00.000Z",
+    "updatedAt": "2025-07-08T08:50:00.000Z"
+  },
+  {
+    "id": 2012,
+    "title": "Laptop Cooling Pad Dual Fan",
+    "price": 109,
+    "description": "Pendingin laptop dengan kipas ganda dan lampu LED biru, port USB tambahan.",
+    "category": {
+      "id": 2,
+      "name": "Electronics",
+      "slug": "electronics"
+    },
+    "images": ["images/product12.jpg"],
+    "creationAt": "2025-07-08T08:55:00.000Z",
+    "updatedAt": "2025-07-08T08:55:00.000Z"
+  },
+  {
+    "id": 2013,
+    "title": "HD Webcam Autofocus 60fps",
+    "price": 249,
+    "description": "Webcam HD autofokus, mikrofon ganda, cocok untuk streaming dan meeting profesional.",
+    "category": {
+      "id": 2,
+      "name": "Electronics",
+      "slug": "electronics"
+    },
+    "images": ["images/product13.jpg"],
+    "creationAt": "2025-07-08T09:00:00.000Z",
+    "updatedAt": "2025-07-08T09:00:00.000Z"
+  },
+  {
+    "id": 2014,
+    "title": "Wireless Power Bank 20.000mAh",
+    "price": 169,
+    "description": "Power bank besar dengan wireless charging dan dual output USB + Type-C.",
+    "category": {
+      "id": 2,
+      "name": "Electronics",
+      "slug": "electronics"
+    },
+    "images": ["images/product14.jpg"],
+    "creationAt": "2025-07-08T09:05:00.000Z",
+    "updatedAt": "2025-07-08T09:05:00.000Z"
+  },
+  {
+    "id": 2015,
+    "title": "Bluetooth Foldable Keyboard",
+    "price": 139,
+    "description": "Keyboard lipat super ringan, koneksi stabil, dan tahan hingga 60 jam pemakaian.",
+    "category": {
+      "id": 2,
+      "name": "Electronics",
+      "slug": "electronics"
+    },
+    "images": ["images/product15.jpg"],
+    "creationAt": "2025-07-08T09:10:00.000Z",
+    "updatedAt": "2025-07-08T09:10:00.000Z"
+  }
+]
