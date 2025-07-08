@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import '../models/product_model.dart';
 import '../services/api_service.dart';
 import '../utils/constants.dart';
 import '../widgets/product_card.dart';
+import '../widgets/welcome_dialog.dart';
+import 'cart_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -22,6 +25,22 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     loadProducts();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _checkWelcomeDialog();
+    });
+  }
+
+  Future<void> _checkWelcomeDialog() async {
+    final box = await Hive.openBox('settings');
+    final showWelcome = box.get('showWelcome', defaultValue: true);
+    if (showWelcome && mounted) {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (_) => const WelcomeDialog(),
+      );
+    }
   }
 
   Future<void> loadProducts() async {
@@ -74,6 +93,17 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.shopping_cart),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const CartScreen()),
+              );
+            },
+          ),
+          const SizedBox(width: 8),
+
           Padding(
             padding: const EdgeInsets.only(right: 12),
             child: CircleAvatar(
@@ -120,7 +150,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemCount: filteredProducts.length,
                 itemBuilder: (context, index) {
                   final product = filteredProducts[index];
-
                   return Stack(
                     children: [
                       ProductCard(product: product),
@@ -138,7 +167,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           child: Text(
                             product.source == "custom"
-                                ? "Custom"
+                                ? "Custom API"
                                 : "Fakestore",
                             style: const TextStyle(
                               fontSize: 10,
