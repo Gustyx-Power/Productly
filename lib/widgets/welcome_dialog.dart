@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class WelcomeDialog extends StatefulWidget {
   const WelcomeDialog({super.key});
@@ -32,14 +33,24 @@ class _WelcomeDialogState extends State<WelcomeDialog>
   }
 
   Future<void> _setDoNotShowAgain() async {
-    final box = Hive.box('session');
+    final box = Hive.box('settings');
     await box.put('showWelcome', false);
   }
 
   void _launchURL(String url) async {
     final uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    try {
+      final canLaunchExternal = await canLaunchUrl(uri);
+      if (canLaunchExternal) {
+        await launchUrl(
+          uri,
+          mode: LaunchMode.externalApplication,
+        );
+      } else {
+        debugPrint("Tidak bisa membuka URL: $url");
+      }
+    } catch (e) {
+      debugPrint("Error buka URL: $e");
     }
   }
 
@@ -51,23 +62,23 @@ class _WelcomeDialogState extends State<WelcomeDialog>
       scale: _scaleAnim,
       child: AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        title: const Text("Selamat Datang di Productly! 🎉"),
+        title: const Text("Selamat Datang Di Productly! 🎉"),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              "Terima kasih telah menggunakan aplikasi ini sebagai bagian dari tugas akhir mata kuliah *Pengembangan Aplikasi Mobile*.",
+              "Terima Kasih Telah Menggunakan Aplikasi Ini Sebagai Bagian Dari Tugas Akhir Mata Kuliah Pemrograman Mobile 2.",
               style: theme.textTheme.bodyMedium,
             ),
             const SizedBox(height: 8),
             const Text(
-              "Aplikasi ini dikembangkan oleh\nGusti Aditya Muzaky\nUniversitas Pelita Bangsa",
+              "Aplikasi Ini Dikembangkan Oleh\nGusti Aditya Muzaky\nUniversitas Pelita Bangsa",
               textAlign: TextAlign.center,
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 12),
             Text(
-              "🚀 Proyek ini juga bagian dari pengembangan open-source saya:\n**Xtra Manager Software (XMS)** — solusi terbuka untuk manajemen perangkat.",
+              "🚀 Proyek Ini Juga Bagian Dari Pengembangan Open-Source Apps Saya Sebagai Founder Dari:\nXtra Manager Software (XMS) — Berjalan Di Sumber Terbuka!.",
               style: theme.textTheme.bodySmall,
               textAlign: TextAlign.center,
             ),
@@ -76,14 +87,14 @@ class _WelcomeDialogState extends State<WelcomeDialog>
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 IconButton(
-                  icon: const Icon(Icons.code),
+                  icon: const Icon(FontAwesomeIcons.github),
                   tooltip: 'GitHub',
-                  onPressed: () => _launchURL("https://github.com/gustyx/XtraManager"),
+                  onPressed: () => _launchURL("https://github.com/Gustyx-Power"),
                 ),
                 IconButton(
                   icon: const Icon(Icons.telegram),
-                  tooltip: 'Telegram',
-                  onPressed: () => _launchURL("https://t.me/xms_community"),
+                  tooltip: 'XMS Telegram',
+                  onPressed: () => _launchURL("https://t.me/XtraManagerSoftware"),
                 ),
               ],
             ),
