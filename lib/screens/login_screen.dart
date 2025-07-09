@@ -68,9 +68,19 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Selamat Datang 👋", style: theme.textTheme.headlineMedium),
+                Text(
+                  "Selamat Datang 👋",
+                  style: theme.textTheme.headlineMedium?.copyWith(
+                    color: theme.brightness == Brightness.dark ? Colors.white : null,
+                  ),
+                ),
                 const SizedBox(height: 6),
-                Text("Masuk ke akun kamu untuk lanjut", style: theme.textTheme.bodyMedium),
+                Text(
+                  "Masuk ke akun kamu untuk lanjut",
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    color: theme.brightness == Brightness.dark ? Colors.white70 : null,
+                  ),
+                ),
                 const SizedBox(height: 32),
 
                 if (_error != null)
@@ -86,7 +96,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         const Icon(Icons.error_outline, color: Colors.red),
                         const SizedBox(width: 8),
                         Expanded(
-                          child: Text(_error!, style: TextStyle(color: theme.colorScheme.error)),
+                          child: Text(
+                            _error!,
+                            style: TextStyle(
+                              color: theme.colorScheme.error,
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -95,6 +110,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 TextFormField(
                   controller: _emailCtrl,
                   keyboardType: TextInputType.emailAddress,
+                  style: TextStyle(
+                    color: theme.brightness == Brightness.dark ? Colors.white : null,
+                  ),
                   decoration: const InputDecoration(
                     labelText: "Email",
                     prefixIcon: Icon(Icons.email_outlined),
@@ -108,6 +126,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 TextFormField(
                   controller: _passCtrl,
                   obscureText: true,
+                  style: TextStyle(
+                    color: theme.brightness == Brightness.dark ? Colors.white : null,
+                  ),
                   decoration: const InputDecoration(
                     labelText: "Kata Sandi",
                     prefixIcon: Icon(Icons.lock_outline),
@@ -122,12 +143,17 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: FilledButton.icon(
                     onPressed: _isLoading ? null : _login,
                     icon: const Icon(Icons.login),
-                    label: _isLoading
-                        ? const SizedBox(
-                      width: 16,
-                      height: 16,
-                      child: CircularProgressIndicator(strokeWidth: 2),
-                    )
+                    label: _isLoading ?
+                         SizedBox(
+                            width: 16,
+                            height: 16,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                theme.brightness == Brightness.dark ? Colors.black : Colors.white,
+                              ),
+                            ),
+                          )
                         : const Text("Masuk"),
                   ),
                 ),
