@@ -82,9 +82,9 @@ class _SplashScreenState extends State<SplashScreen>
                     letterSpacing: 1.2,
                   ),
                 ),
-                const SizedBox(height: 4),
+                const SizedBox(height: 6),
                 Text(
-                  "Expressive. Modular. You.",
+                  "Expressive. EasyUse & Modular For You.",
                   style: theme.textTheme.labelLarge?.copyWith(
                     color: Colors.white70,
                   ),
