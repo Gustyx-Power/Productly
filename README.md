@@ -6,7 +6,7 @@
 
 ## 📱 Fitur
 
-- 🔐 Autentikasi Firebase (Email & Google Sign-In)
+- 🔐 Autentikasi Setelah Daftar (Email)
 - 🛒 Manajemen Keranjang menggunakan Penyimpanan Lokal Hive
 - 🧾 Pengambilan Produk Dinamis dari REST API
 - 💳 Alur Checkout dengan Gerbang Pembayaran Dummy (GoPay, DANA, Blu BCA, ShopeePay, dll.)
@@ -19,7 +19,7 @@
 ## 🧭 Alur Aplikasi
 
 1. **Layar Splash** – memeriksa sesi dan mengarahkan ke beranda atau login.
-2. **Autentikasi** – daftar atau login melalui Firebase.
+2. **Autentikasi** – daftar atau login manual.
 3. **Penjelajahan Produk** – pengguna dapat menjelajahi berbagai produk dalam daftar yang dapat digulir.
 4. **Detail Produk** – menampilkan gambar produk, harga, deskripsi, dan opsi tambah ke keranjang.
 5. **Layar Keranjang** – mengelola item keranjang dengan penyesuaian jumlah dan fungsionalitas hapus.
