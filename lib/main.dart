@@ -9,28 +9,24 @@ import 'models/user_model.dart';
 import 'theme/theme_config.dart';
 import 'utils/constants.dart';
 import 'screens/splash_screen.dart';
+import 'screens/payment_success_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // 🔧 Init Hive dan direktori
   final appDir = await getApplicationDocumentsDirectory();
   await Hive.initFlutter(appDir.path);
 
-  // ✅ Sebelum openBox, daftarkan adapter
   Hive.registerAdapter(UserModelAdapter());
   Hive.registerAdapter(CartItemAdapter());
   Hive.registerAdapter(ProductAdapter());
 
-
-// ✅ Lalu open box-nya
   await Hive.openBox('products');
-  await Hive.openBox<CartItem>('cart'); // buka sebagai CartItem
+  await Hive.openBox<CartItem>('cart');
   await Hive.openBox('session');
   await Hive.openBox<UserModel>('users');
   await Hive.openBox('settings');
 
-  // 🔒 Lock orientasi ke portrait
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -47,8 +43,17 @@ class ProductlyApp extends StatelessWidget {
     return MaterialApp(
       title: kAppName,
       debugShowCheckedModeBanner: false,
-      theme: lightTheme, // 🎨 Material 3 Light Theme
-      home: const SplashScreen(), // 🚀 Mulai dari Splash Screen
+      theme: lightTheme,
+      home: const SplashScreen(),
+
+      routes: {
+        '/payment-success': (context) => PaymentSuccessScreen(
+          title: 'Pembayaran',
+          onFinish: () {
+            Navigator.popUntil(context, (route) => route.isFirst); // balik ke Home
+          },
+        ),
+      },
     );
   }
 }
