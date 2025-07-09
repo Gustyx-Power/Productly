@@ -161,18 +161,20 @@ class _HomeScreenState extends State<HomeScreen> {
                               horizontal: 6, vertical: 2),
                           decoration: BoxDecoration(
                             color: product.source == "custom"
-                                ? Colors.amber
-                                : Colors.blueGrey,
+                                ? Colors.blueAccent
+                                : Colors.purple,
                             borderRadius: BorderRadius.circular(6),
                           ),
                           child: Text(
                             product.source == "custom"
-                                ? "Custom API"
-                                : "Fakestore",
-                            style: const TextStyle(
+                                ? "Custom FakeStore   \n      By Gustyx API"
+                                : "FakeStore Official API",
+                            style: TextStyle(
                               fontSize: 10,
                               fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                              color: theme.brightness == Brightness.light
+                                  ? Colors.white // Warna teks putih untuk tema gelap
+                                  : Colors.white, // Warna teks putih untuk tema terang (atau sesuaikan jika perlu)
                             ),
                           ),
                         ),
