@@ -17,6 +17,9 @@ dependencies:
   badges: ^3.1.1
   shimmer: ^3.0.0
   font_awesome_flutter: ^10.8.0
+  confetti: ^0.8.0
+  audioplayers: ^5.2.1
+  lottie: ^3.3.1
 
   # Data
   http: ^1.2.1
@@ -35,6 +38,17 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/sounds/chaching.mp3
+    - assets/lottie/loading_wallet.json
+    - assets/lottie/success_payment.json
+    - assets/icons/blu.png
+    - assets/icons/dana.jpeg
+    - assets/icons/gopay.png
+    - assets/icons/spay.png
+    - assets/icons/seabank.png
+    - assets/icons/btn.png
+
 
 flutter_icons:
   android: true
