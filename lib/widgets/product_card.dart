@@ -142,7 +142,7 @@ class _ProductCardState extends State<ProductCard> with SingleTickerProviderStat
             Padding(
               padding: const EdgeInsets.fromLTRB(8, 4, 8, 12),
               child: Text(
-                "Rp ${product.price}000",
+                "Rp ${product.price}.000",
                 style: theme.textTheme.labelLarge?.copyWith(
                   color: theme.colorScheme.primary,
                   fontWeight: FontWeight.bold,

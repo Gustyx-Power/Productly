@@ -3,6 +3,7 @@ import '../models/product_model.dart';
 import '../models/cart_item.dart';
 import '../services/cart_service.dart';
 import '../services/auth_service.dart';
+import '../widgets/payment_dialog.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   final Product product;
@@ -17,21 +18,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
 
   void _handleCart() async {
     final isLoggedIn = await AuthService.isLoggedIn();
-
     if (!isLoggedIn) {
-      showDialog(
-        context: context,
-        builder: (_) => AlertDialog(
-          title: const Text("Butuh Login"),
-          content: const Text("Silakan login untuk menggunakan fitur keranjang."),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text("OK"),
-            )
-          ],
-        ),
-      );
+      _showLoginDialog();
       return;
     }
 
@@ -45,32 +33,33 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
     );
   }
 
-  void _handleBuyNow() {
-    final controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 500),
-    );
+  void _handleBuyNow() async {
+    final isLoggedIn = await AuthService.isLoggedIn();
+    if (!isLoggedIn) {
+      _showLoginDialog();
+      return;
+    }
 
+    final total = widget.product.price * quantity;
+    final success = await showPaymentDialog(context, total);
+
+    if (success && mounted) {
+      Navigator.pushNamed(context, '/payment-success');
+    }
+  }
+
+  void _showLoginDialog() {
     showDialog(
       context: context,
-      builder: (_) => Center(
-        child: ScaleTransition(
-          scale: CurvedAnimation(
-            parent: controller..forward(),
-            curve: Curves.easeOutBack,
-          ),
-          child: AlertDialog(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-            title: const Text("Yuk Checkout!"),
-            content: Text("Pembelian *${widget.product.title}* sukses secara imajinatif 🎉"),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text("OK"),
-              )
-            ],
-          ),
-        ),
+      builder: (_) => AlertDialog(
+        title: const Text("Butuh Login"),
+        content: const Text("Silakan login untuk menggunakan fitur ini."),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("OK"),
+          )
+        ],
       ),
     );
   }
@@ -101,7 +90,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
             style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 8),
-          Text("Rp ${p.price}000", style: theme.textTheme.titleMedium?.copyWith(color: theme.colorScheme.primary)),
+          Text(
+            "Rp ${p.price}.000",
+            style: theme.textTheme.titleMedium?.copyWith(color: theme.colorScheme.primary),
+          ),
           const SizedBox(height: 16),
           Text(p.description, style: theme.textTheme.bodyMedium),
           const SizedBox(height: 24),
